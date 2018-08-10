@@ -1,0 +1,470 @@
+web.xmlの作成
+
+1 「プロジェクト」「WebContent」「
+WEB-INF」の中にある「web.xml」ファ
+イルを開きます。
+
+2 このコードが初期状態で入っています。
+
+1 Web.xml
+
+3 上記の内容を次のページの内容
+に変更します。
+
+web.xmlの作成
+
+4 以下の内容に書き換えます。
+
+web.xml(xmlファイル)
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+<display-name>template</display-name>
+<welcome-file-list>
+<welcome-file>home.jsp</welcome-file>
+</welcome-file-list>
+
+<filter>
+<filter-name>struts2</filter-name>
+<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+</filter>
+
+次へ続きます。
+
+プロジェクト名を設定します。
+「template」と書いてください。
+
+最初に表示するJSPファイルを設定します。
+初回アクセスで表示させたいJSPファイル名を
+書いてください。
+
+Struts2を使うので、以下の設定を書いて
+ください。
+
+web.xmlの作成
+
+<filter-mapping>
+<filter-name>struts2</filter-name>
+<url-pattern>/*</url-pattern>
+</filter-mapping>
+</web-app>
+
+前の続きです。
+
+struts.xmlの作成
+
+1 「Javaリソース」「src」を選択し、
+「プロジェクトを右クリック」「新規」「その他」
+を選択します。
+2 Struts.xml
+
+2 「ウィザード(W):」欄の「XML」「XMLファイル」
+を選択し、完了ボタンをクリックします。
+
+struts.xmlの作成
+
+3 ファイル名(M):の欄に「struts.xml」
+を入力して、完了をクリックします。
+
+4 「Javaリソース」「src」の直下に「
+struts.xml」が作成されていれば成功です。
+
+struts.xmlの説明(書き方)
+
+<action name="LoginAction" class="com.internousdev.template.action.LoginAction"
+method="execute">
+
+<result name="success">buyItem.jsp</result>
+<result name="error">home.jsp</result>
+
+</action>
+
+「com.internousdev.action」パッケ
+ージの「LoginAction」に設定します。
+「com.internousdev.template.action」
+パッケージの「LoginAction」に設定します
+。
+
+「LoginAction」クラスの中で「
+execute」メソッドが最初に呼び出され
+ます。
+
+「execute」メソッドの処理結果に応じ
+てフロントに送る「JSPファイル」を設
+定しています。
+
+次ページ以降、このルールで<action>タグを複数記載していますが、実際は最初に全部のコードを書かず、<action>タグ内で指定して
+いるActionファイル/jspファイルを作った段階で、都度<action>~</action>を書き足していきます。
+
+struts.xmlの説明(書き方)
+
+5 以下の内容を写経します。
+(最初はこの部分だけ書いておきます)
+
+struts.xml(xmlファイル)
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+<!-- Strutsの詳細設定 -->
+<struts>
+
+<constant name="struts.devMode" value="true" />
+
+<!-- 対象のpackageを設定 -->
+
+<package name="com.internousdev.template.action" extends="struts-default">
+
+</package>
+
+</struts>
+
+この部分には、複数の<action>タグを後から書き足していきます。
+(各<action>タグ内で指定しているActionファイル/jspファイルを作り終えた段階で、都度
+<action>~</action>を1つずつ追加していきます。
+
+struts.xmlの作成
+
+プロジェクト完成時には、全体で以下の内容になるようにします。
+
+struts.xml(xmlファイル)
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+<!-- Strutsの詳細設定 -->
+<struts>
+
+<constant name="struts.devMode" value="true" />
+
+<!-- 対象のpackageを設定 -->
+
+<package name="com.internousdev.template.action" extends="struts-default">
+
+<!-- HomeAction -->
+<action name="HomeAction" class="com.internousdev.template.action.HomeAction"
+
+method="execute">
+
+<result name="success">login.jsp</result>
+
+</action>
+
+呼び出されるJavaクラスファイルと実行
+
+するメソッドを登録します。 次へ続きます。
+
+後から1つずつ書き足して
+いく部分です。
+
+記載のActionファイル/
+jspファイルが存在しない
+状態で実行するとエラーに
+なります。
+
+<!-- LoginAction -->
+<action name="LoginAction" class="com.internousdev.template.action.LoginAction"
+
+method="execute">
+
+<result name="success">buyItem.jsp</result>
+<result name="error">home.jsp</result>
+
+</action>
+<!-- UserCreateAction -->
+<action name="UserCreateAction"
+
+class="com.internousdev.template.action.UserCreateAction" method="execute">
+<result name="success">userCreate.jsp</result>
+
+</action>
+<!-- UserCreateConfirmAction -->
+<action name="UserCreateConfirmAction"
+
+class="com.internousdev.template.action.UserCreateConfirmAction" method="execute">
+<result name="success">userCreateConfirm.jsp</result>
+<result name="error">userCreate.jsp</result>
+
+</action>
+
+前の続きです。
+
+次へ続きます。
+
+記載のActionファイル/
+jspファイルが存在しない
+状態で実行するとエラーに
+なります。
+
+struts.xmlの作成
+
+struts.xmlの作成
+
+<!-- UserCreateCompleteAction -->
+<action name="UserCreateCompleteAction"
+
+class="com.internousdev.template.action.UserCreateCompleteAction" method="execute">
+<result name="success">userCreateComplete.jsp</result>
+
+</action>
+<!-- BuyItemAction -->
+<action name="BuyItemAction"
+
+class="com.internousdev.template.action.BuyItemAction" method="execute">
+<result name="success">buyItemConfirm.jsp</result>
+
+</action>
+<!-- BuyItemConfirmAction -->
+<action name="BuyItemConfirmAction"
+
+class="com.internousdev.template.action.BuyItemConfirmAction" method="execute">
+<result name="success">buyItemComplete.jsp</result>
+
+</action>
+
+前の続きです。
+
+次へ続きます。
+
+struts.xmlの作成
+
+<!-- MyPageAction -->
+<action name="MyPageAction"
+
+class="com.internousdev.template.action.MyPageAction" method="execute">
+<result name="success">myPage.jsp</result>
+
+</action>
+
+</package>
+
+</struts>
+
+前の続きです。
+
+DBConnectorの作成
+
+3 DBConnector
+
+1 「src」「com.internousdev.template.util」を
+選択し、「右クリック」「新規」「クラス」を選択
+します。 2 「名前(M):」欄に「DBConnector」
+と入力し、完了ボタンをクリックします。
+
+DBConnectorの作成
+
+3 以下の内容を写経します。
+
+DBConnector.java
+(javaファイル)
+
+次へ続きます。
+
+package com.internousdev.template.util;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+public class DBConnector {
+
+private static String driverName = "com.mysql.jdbc.Driver";
+private static String url = "jdbc:mysql://localhost/ecsite";
+private static String user = "root";
+private static String password = "mysql";
+public Connection getConnection() {
+Connection con = null;
+try {
+
+Class.forName(driverName);
+con = (Connection) DriverManager.getConnection(url,user,password);
+MySQL接続に必要な情報を設定します。
+
+接続情報から自分のパソコンにインスト
+ールされているMySQLへ接続する準備が
+整います。
+
+DBConnectorの作成
+
+} catch(ClassNotFoundException e) {
+
+e.printStackTrace();
+
+} catch(SQLException e) {
+
+e.printStackTrace();
+
+}
+return con;
+}
+
+}
+
+前の続きです。
+
+Mysqlに接続できたか情報を渡します。
+
+MySQL JDBC ドライバーの配備
+
+4 MySQL JDBC ドライバー
+
+1 「https://dev.mysql.com/downloads/
+connector/j/」にアクセスします。
+
+2 下へスクロールして、「zip」形式の
+Downloadボタンをクリックします。
+
+MySQL JDBC ドライバーの配備
+
+3 遷移した先の画面でも、下へスクロールし、
+「No thanks, just start my download.」リンクを
+クリックします。
+
+4 「保存」ボタンをクリックします。
+
+MySQL JDBC ドライバーの配備
+
+5 ダウンロードが完了後「フォルダを開
+く」ボタンをクリックします。
+
+6 ダウンロードファイルが格納されてい
+る「ディレクトリ」が開きます。
+対象のディレクトリの中に「mysql- connector-java-x.x.xx.zip」を探します
+。
+
+MySQL JDBC ドライバーの配備
+
+7 「mysql-connector-java-x.x.xx.zip」を
+右クリックし、「解凍」または「展開」します。
+
+8 解凍が終わると「mysql-connector-
+java-x.x.xx」という名前のディレクトリ
+
+が増えます。
+「mysql-connector-java-x.x.xx」をダ
+ブルクリックします。
+
+MySQL JDBC ドライバーの配備
+
+9 「mysql-connector-java-x.x.xx」ディレクトリ
+の中に「mysql-connector-java-x.x.xx-bin.jar」
+があることを確認します。
+
+10 「プロジェクト」「WebContent」
+「WEB-INF」「lib」の中に
+「mysql-connector-java-x.x.xx- bin.jar」をコピーします。
+
+SQLファイルの配備
+
+1 「プロジェクト」の直下に「sql」フォルダを
+作成します。
+
+2 「sql」の上で「右クリック」「新
+規」「SQLファイル」を選択します。
+
+SQLファイルの配備
+
+3 「ファイル名(M):」の欄に「ecsite.sql」と入力
+し、完了をクリックします。
+
+4 SQLファイルが作成できていれば
+成功です。
+
+SQLファイルの写経
+
+3 以下の内容を写経します。
+
+ecsite.sql(sqlファイル)
+
+次へ続きます。
+
+set names utf8;
+set foreign_key_checks = 0;
+drop database if exists ecsite;
+create database if not exists ecsite;
+use ecsite;
+drop table if exists login_user_transaction;
+create table login_user_transaction(
+id int not null primary key auto_increment,
+login_id varchar(16) unique,
+login_pass varchar(16),
+user_name varchar(50),
+insert_date datetime,
+updated_date datetime
+);
+
+「ecsite」がデータベース名になります。
+
+「login_user_transaction」がテーブル名になります。
+
+「login_user_transaction」テーブルに情報を保存します。
+
+SQLファイルの写経
+
+drop table if exists item_info_transaction;
+create table item_info_transaction(
+id int not null primary key auto_increment,
+item_name varchar(30),
+item_price int,
+item_stock int,
+insert_date datetime,
+update_date datetime
+);
+drop table if exists user_buy_item_transaction;
+create table user_buy_item_transaction(
+id int not null primary key auto_increment,
+item_transaction_id int,
+total_price int,
+total_count int,
+user_master_id varchar(16),
+pay varchar(30),
+
+前の続きです。
+
+次へ続きます。
+
+SQLファイルの写経
+
+insert_date datetime,
+delete_date datetime
+);
+INSERT INTO item_info_transaction(item_name, item_price, item_stock) VALUES("ノートBook"
+
+, 100,
+
+50);
+INSERT INTO login_user_transaction(login_id, login_pass, user_name) VALUES("internous"
+,
+
+"internous01"
+,
+"test");
+
+前の続きです。
+
+作成したテーブルに情報を格納します。
+
+SQLの解説
+
+drop database if exists ecsite;
+
+create database ecsite;
+
+use ecsite;
+
+「user」テーブルに情報を保存します。
+
+「com.internousdev.action」パッケ
+ージの「LoginAction」に設定します。
+もし「ecsite」という
+データベースがあったら、削除します。
+
+「com.internousdev.action」パッケ
+ージの「LoginAction」に設定します。
+「ecsite」データベースを作成
+します。
+
+「com.internousdev.action」パッケ
+ージの「LoginAction」に設定します。
+作成した「ecsite」データベース
+を利用します。

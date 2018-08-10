@@ -1,0 +1,566 @@
+作業目次
+
+1.ログイン認証機能
+
+2.ユーザー登録機能
+
+3.商品購入機能
+
+4.購入履歴機能トの作成
+作成機能一覧
+
+MyPageDTO.javaの作成
+
+1 MyPageDTO.java
+
+1 「com.internousdev.tempalte.dto」を選択し
+、「右クリック」「新規」「クラス」を選択します
+。
+
+2 「名前(M):」欄に「MyPageDTO」を入力し、完
+了ボタンをクリックします。
+
+MyPageDTO.javaの作成
+
+3 以下の内容を写経します。
+
+MyPageDTO .java
+(javaファイル)
+
+package com.internousdev.template.dto;
+public class MyPageDTO {
+
+private String itemName;
+private String totalPrice;
+private String totalCount;
+private String payment;
+public String getItemName() {
+
+return this.itemName;
+
+}
+public void setItemName(String itemName) {
+
+this.itemName = itemName;
+
+}
+
+次へ続きます。
+
+MyPageDTO.javaの作成
+
+public String getTotalPrice() {
+
+return this.totalPrice;
+
+}
+public void setTotalPrice(String totalPrice) {
+
+this.totalPrice = totalPrice;
+
+}
+public String getTotalCount() {
+
+return this.totalCount;
+
+}
+public void setTotalCount(String totalCount) {
+
+this.totalCount = totalCount;
+
+}
+public String getPayment() {
+
+return this.payment;
+
+}
+public void setPayment(String payment) {
+
+this.payment = payment;
+
+}
+
+}
+
+前の続きです。
+
+MyPageDAO.javaの作成
+
+2 MyPageDAO.java
+
+1 「com.internousdev.tempalte.dao」を選択し
+、「右クリック」「新規」「クラス」を選択します
+。
+
+2 「名前(M):」欄に「MyPageDAO」を入力し、完
+了ボタンをクリックします。
+
+MyPageDAO.javaの作成
+
+3 以下の内容を写経します。
+
+MyPageDAO .java
+(javaファイル)
+
+package com.internousdev.template.dao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import com.internousdev.template.dto.MyPageDTO;
+import com.internousdev.template.util.DBConnector;
+public class MyPageDAO {
+
+public MyPageDTO getMyPageUserInfo(String item_transaction_id, String user_master_id)
+
+throws SQLException {
+
+DBConnector dbConnecor = new DBConnector();
+Connection connection = dbConnector.getConnection();
+MyPageDTO myPageDTO = new MyPageDTO();
+
+次へ続きます。
+
+MyPageDAO.javaの作成
+
+String sql = “SELECT iit.item_name, ubit.total_price, ubit.total_count,
+
+ubit.pay FROM user_buy_item_transaction ubit LEFT JOIN item_info_transaction iit ON
+ubit.item_transaction_id = iit.id WHERE ubit.item_transaction_id = ? AND
+ubit.user_master_id = ? ORDER BY ubit.insert_date DESC”;
+
+try {
+
+PreparedStatement preparedStatement =
+
+connection.prepareStatement(sql);
+
+preparedStatement.setString(1, item_transaction_id);
+preparedStatement.setString(2, user_master_id);
+ResultSet resultSet = preparedStatement.executeQuery();
+if(resultSet.next()) {
+myPageDTO.setItemName(resultSet.getString(“item_name”));
+myPageDTO.setTotalPrice(resultSet.getString(“total_price”));
+myPageDTO.setTotalCount(resultSet.getString(“total_count”));
+myPageDTO.setPayment(resultSet.getString(“pay”));
+}
+
+前の続きです。
+
+次へ続きます。
+
+MyPageDAO.javaの作成
+
+} catch(Exception e) {
+
+e.printStackTrace();
+} finally {
+connection.close();
+
+}
+return myPageDTO;
+
+}
+public int buyItemHistoryDelete(String item_transaction_id, String user_master_id)
+
+throws SQLException {
+
+DBConnector dbConnecor = new DBConnector();
+Connection connection = dbConnector.getConnection();
+String sql = “DELETE FROM user_buy_item_transaction WHERE
+
+item_transaction_id = ? AND user_master_id = ?”;
+
+PreparedStatement preparedStatement;
+int result = 0;
+
+前の続きです。
+
+次へ続きます。
+
+MyPageDAO.javaの作成
+
+try {
+
+preparedStatement = connection.prepareStatement(sql);
+preparedStatement.setString(1, item_transaction_id);
+preparedStatement.setString(2, user_,master_id);
+result = preparedStatement.executeUpdate();
+
+} catch(SQLException e) {
+
+e.printStackTrace();
+} finally {
+connection.close();
+
+}
+return result;
+
+}
+
+}
+
+前の続きです。
+
+MyPageAction.javaの作成
+
+3 MyPageAction.java
+
+1 「com.internousdev.tempalte.action」を選択
+し、「右クリック」「新規」「クラス」を選択しま
+す。
+
+2 「名前(M):」欄に「MyPageAction」を入力し、
+完了ボタンをクリックします。
+
+MyPageAction.javaの作成
+
+3 以下の内容を写経します。
+
+MyPageAction .java
+(javaファイル)
+
+package com.internousdev.template.action;
+import java.sql.SQLException;
+import java.util.Map;
+import org.apache.struts2.interceptor.SessionAware;
+import com.internousdev.template.dao.MyPageDAO;
+import com.internousdev.template.dto.MyPageDTO;
+import com.opensymphony.xwork2.ActionSupport;
+public class MyPageAction extends ActionSupport implements SessionAware{
+
+public Map<String, Object> session;
+public String deleteFlg;
+private String result;
+public String execute() throws SQLException {
+MyPageDAO myPageDAO = new MyPageDAO();
+MyPageDTO myPageDTO = new MyPageDTO();
+// 商品履歴を削除しない場合
+if(deleteFlg == null) {
+次へ続きます。
+
+MyPageAction.javaの作成
+
+String item_transaction_id = session.get("id").toString();
+String user_master_id = session.get("login_user_id").toString();
+myPageDTO = myPageDAO.getMyPageUserInfo(item_transaction_id,
+
+user_master_id);
+
+session.put(“buyItem_name”
+
+, myPageDTO.getItemName());
+
+session.put("total_price"
+
+, myPageDTO.getTotalPrice());
+
+session.put("total_count"
+
+, myPageDTO.getTotalCount());
+
+session.put("total_payment"
+
+, myPageDTO.getPayment());
+
+session.put("message"
+,
+"");
+
+// 商品履歴を削除する場合
+} else if(deleteFlg.equals("1")) {
+
+delete();
+
+}
+result = SUCCESS;
+return result;
+
+}
+
+前の続きです。
+
+次へ続きます。
+
+MyPageAction.javaの作成
+
+public void delete() throws SQLException {
+
+MyPageDAO myPageDAO = new MyPageDAO();
+String item_transaction_id = session.get("id").toString();
+String user_master_id = session.get("login_user_id").toString();
+int res = myPageDAO.buyItemHistoryDelete(item_transaction_id,
+
+user_master_id);
+
+if(res > 0) {
+
+session.put("message"
+,
+"商品情報を正しく削除しました。
+");
+
+} else if(res == 0) {
+
+session.put("message"
+,
+"商品情報の削除に失敗しました。
+");
+
+}
+
+}
+
+前の続きです。
+
+次へ続きます。
+
+MyPageAction.javaの作成
+
+public String getDeleteFlg() {
+
+return deleteFlg;
+
+}
+public void setDeleteFlg(String deleteFlg) {
+
+this.deleteFlg = deleteFlg;
+
+}
+@Override
+public void setSession(Map<String, Object> loginSessionMap) {
+
+this.session = loginSessionMap;
+
+}
+
+}
+
+前の続きです。
+
+この後、struts.xmlにMyPageActionの<action>タグ部分を書き足します。(2時間目13ページを参照)
+
+myPage.jspの作成
+
+1 「プロジェクト」「WebContent」を選択し、
+「右クリック」「新規」「JSPファイル」を選択し
+ます。
+
+2 「名前(M):」欄に「myPage.jsp」
+を入力し、完了ボタンをクリックします。
+
+4 myPage.jsp
+
+myPage.jspの作成
+
+3 以下の内容を写経します。
+
+myPage.jsp(jspファイル)
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+
+pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<title>MyPage画面</title>
+<style type="text/css">
+/* ========TAG LAYOUT======== */
+
+次へ続きます。
+
+myPage.jspの作成
+
+body {
+margin:0;
+padding:0;
+line-height:1.6;
+letter-spacing:1px;
+font-family:Verdana, Helvetica, sans-serif;
+font-size:12px;
+color:#333;
+background:#fff;
+}
+table {
+text-align:center;
+margin:0 auto;
+}
+/* ========ID LAYOUT======== */
+#top {
+width:780px;
+margin:30px auto;
+前の続きです。
+
+次へ続きます。
+
+myPage.jspの作成
+
+border:1px solid #333;
+}
+#header {
+width: 100%;
+height: 80px;
+background-color: black;
+}
+#main {
+width: 100%;
+height: 500px;
+text-align: center;
+}
+#footer {
+width: 100%;
+height: 80px;
+background-color: black;
+clear:both;
+}
+
+前の続きです。
+
+次へ続きます。
+
+myPage.jspの作成
+
+</style>
+
+</head>
+<body>
+
+<div id="header">
+
+<div id="pr">
+</div>
+
+</div>
+<div id="main">
+
+<div id="top">
+<p>MyPage</p>
+
+</div>
+<div>
+<s:if test="session.message == ''">
+
+<h3>ご購入情報は以下になります。</h3>
+<table>
+<tr>
+
+<td>商品名</td>
+<td><s:property value="session.buyItem_name" /></td>
+
+</tr>
+
+前の続きです。
+
+次へ続きます。
+
+myPage.jspの作成
+
+</tr>
+<tr>
+
+<td>値段</td>
+<td>
+
+<s:property value="session.total_price" />
+
+<span>円</span>
+
+</td>
+
+</tr>
+<tr>
+
+<td>購入個数</td>
+<td>
+
+<s:property value="session.total_count" />
+
+<span>個</span>
+
+</td>
+
+</tr>
+<tr>
+
+<td>支払い方法</td>
+<td><s:property value="session.total_payment" /></td>
+
+</tr>
+</table>
+
+前の続きです。
+
+次へ続きます。
+
+myPage.jspの作成
+
+<s:form action="MyPageAction">
+
+<input type="hidden" name="deleteFlg" value="1">
+<s:submit value="削除" method="delete" />
+
+</s:form>
+
+</s:if>
+<s:if test="session.message != null">
+<h3><s:property value="session.message"/></h3>
+
+</s:if>
+
+<div>
+
+<br>
+<span>前画面に戻る場合は</span>
+<a href='<s:url action="HomeAction" />'>ログアウト</a>
+<span>をお願いします</span>
+
+</div>
+
+</div>
+
+</div>
+
+前の続きです。
+
+次へ続きます。
+
+myPage.jspの作成
+
+<div id="footer">
+
+<div id="pr">
+</div>
+
+</div>
+
+</body>
+</html>
+
+前の続きです。
+
+myPage機能の確認
+
+myPage.jspの画面
+
+直前に購入した購入履歴1件分が表示されていればOKです。続いて「削除」ボタンをクリックします。
+templateプロジェクトを実行し、buyItemComplete画面の「マイページ」リンクから下記のmyPage.jsp画面が表示できるか確認します。
+
+myPage機能の確認
+
+myPage.jspの画面 こちらの画面に切り替われば成功です。
+
+「ログアウト」のリンクからlogin.jsp画面に切り替わるかも確認します。
+
+myPage機能の確認
+
+user_buy_item_transactionテーブル
+
+「ログインしていたユーザー」が「直前に購入した商品」の購入履歴(過去の同じ商品の購入履歴を含みます)が
