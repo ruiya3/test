@@ -12,38 +12,42 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminAction extends ActionSupport implements SessionAware{
 	public Map<String,Object> session;
-	private AdminDAO adminDAO=new AdminDAO();
+	private AdminDAO AdminDAO=new AdminDAO();
 	private ArrayList<AdminDTO>adminList=new ArrayList<AdminDTO>();
 	private String deleteFlg;
 	private String message;
 
 	public String execute()throws SQLException{
-		if(!session.containsKey("")){
+		if(!session.containsKey("login_user_id".equals("ad"))){
 			return ERROR;
 		}
 		if(deleteFlg==null){
-			String item_transaction_id=session.get("id").toString();
-			String user_master_id=session.get("login_user_id").toString();
-			adminList=adminDAO.getAdminUserInfo(item_transaction_id,user_master_id);
-		}else if(deleteFlg.equals("1")){
-			delete();
+			adminList=AdminDAO.getAdminUserInfo();
+
+			System.out.println(adminList.get(0));
+	        System.out.println(adminList.get(1));
+	        System.out.println(adminList.get(2));
+
 		}
+//		else if(deleteFlg.equals("1")){
+//			delete();
+//		}
 		String result=SUCCESS;
 		return result;
 	}
-		public void delete() throws SQLException{
-			String item_transaction_id=session.get("id").toString();
-			String user_master_id=session.get("login_user_id").toString();
-
-			int res=adminDAO.buyItemHistoryDelete(item_transaction_id,user_master_id);
-
-			if(res>0){
-				adminList=null;
-				setMessage("商品情報を正しく削除しました。");
-			}else if(res==0){
-				setMessage("商品情報の削除に失敗しました。");
-				}
-		}
+//		public void delete() throws SQLException{
+//			String item_transaction_id=session.get("id").toString();
+//			String user_master_id=session.get("login_user_id").toString();
+//
+//			int res=AdminDAO.buyItemHistoryDelete(item_transaction_id,user_master_id);
+//
+//			if(res>0){
+//				adminList=null;
+//				setMessage("商品情報を正しく削除しました。");
+//			}else if(res==0){
+//				setMessage("商品情報の削除に失敗しました。");
+//				}
+//		}
 	public void setDeleteFlg(String deleteFlg){
 		this.deleteFlg=deleteFlg;
 	}

@@ -25,12 +25,13 @@ public class MyPageAction extends ActionSupport implements SessionAware{
 			String item_transaction_id=session.get("id").toString();
 			String user_master_id=session.get("login_user_id").toString();
 			myPageList=myPageDAO.getMyPageUserInfo(item_transaction_id,user_master_id);
+
 		}else if(deleteFlg.equals("1")){
 			delete();
 		}
 		String result=SUCCESS;
 		return result;
-	}
+}
 	public void delete() throws SQLException{
 		String item_transaction_id=session.get("id").toString();
 		String user_master_id=session.get("login_user_id").toString();
@@ -61,3 +62,7 @@ public void setMessage(String message){
 	this.message=message;
 }
 }
+
+//			for(Entry<String, Object> entry : session.entrySet()){
+//    System.out.println(entry.getKey() + ":" + entry.getValue());
+//}

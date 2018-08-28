@@ -82,15 +82,16 @@ table {
 			<p>管理者画面</p>
 		</div>
 
-
-		<div id="left">
-		<div id="addleft">
+<div id="addleft">
 				<h1>
 					商品の追加は<a href='<s:url action="GoHomeAction" />'>こちら</a>
-				<h1>
+				</h1>
 
 			</div>
-			<s:if test="myPageList == null">
+
+		<div id="left">
+
+			<s:if test="adminList == null">
 
 				<h3>商品情報はありません</h3>
 
@@ -100,22 +101,25 @@ table {
 				<h3>ご購入情報は以下になります。</h3>
 				<table border="1">
 					<tr>
+						<th>id</th>
 						<th>商品名</th>
 						<th>値段</th>
 						<th>在庫</th>
+						<th>作成日</th>
 						<th>更新日</th>
 					</tr>
-					<s:iterator value="myPageList">
+					<s:iterator value="adminList">
 						<tr>
+						    <td><s:property value="id" /></td>
 							<td><s:property value="itemName" /></td>
-							<td><s:property value="totalPrice" /><span>円</span></td>
-							<td><s:property value="totalCount" /><span>個</span></td>
-							<td><s:property value="payment" /></td>
+							<td><s:property value="itemPrice" /><span>円</span></td>
+							<td><s:property value="itemStock" /><span>個</span></td>
 							<td><s:property value="insert_date" /></td>
+							<td><s:property value="update_date" /></td>
 						</tr>
 					</s:iterator>
 				</table>
-				<s:form action="MyPageAction">
+				<s:form action="AdminAction">
 					<input type="hidden" name="deleteFlg" value="1">
 					<s:submit value="削除" method="delete" />
 				</s:form>
@@ -126,6 +130,8 @@ table {
 					<s:property value="message" />
 				</h3>
 			</s:if>
+
+		</div>
 			<div id="text-right">
 				<p>
 					Homeへ戻る場合は<a href='<s:url action="GoHomeAction" />'>こちら</a>
@@ -134,7 +140,6 @@ table {
 					ログアウトする場合は<a href='<s:url action="LogoutAction" />'>こちら</a>
 				</p>
 			</div>
-		</div>
 	</div>
 	<div id="footer">
 		<div id="pr"></div>

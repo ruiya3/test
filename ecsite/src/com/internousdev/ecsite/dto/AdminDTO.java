@@ -8,6 +8,11 @@ public class AdminDTO {
 	public String userName;
 	public String id;
 	public String insert_date;
+	public String itemPrice;
+	public String itemStock;
+	public String update_date;
+
+
 	public String getItemName() {
 		return itemName;
 	}
@@ -49,6 +54,24 @@ public class AdminDTO {
 	}
 	public void setInsert_date(String insert_date) {
 		this.insert_date = insert_date;
+	}
+	public String getItemPrice() {
+		return itemPrice;
+	}
+	public void setItemPrice(String itemPrice) {
+		this.itemPrice = itemPrice;
+	}
+	public String getItemStock() {
+		return itemStock;
+	}
+	public void setItemStock(String itemStock) {
+		this.itemStock = itemStock;
+	}
+	public String getUpdate_date() {
+		return update_date;
+	}
+	public void setUpdate_date(String update_date) {
+		this.update_date = update_date;
 	}
 }
 

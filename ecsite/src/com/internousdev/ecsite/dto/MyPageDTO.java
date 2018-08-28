@@ -8,7 +8,7 @@ public class MyPageDTO {
 	public String userName;
 	public String id;
 	public String insert_date;
-
+	
 	public String getItemName() {
 		return itemName;
 	}
@@ -51,6 +51,8 @@ public class MyPageDTO {
 	public void setInsert_date(String insert_date) {
 		this.insert_date = insert_date;
 	}
+
+
 }
 
 

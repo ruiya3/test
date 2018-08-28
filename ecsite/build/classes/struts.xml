@@ -54,6 +54,11 @@
 		<result name="success">home.jsp</result>
 		</action>
 
+			<action name="AdminAction" class="com.internousdev.ecsite.action.AdminAction" method="execute">
+		<result name="success">AdminAction</result>
+		<result name="error">error.jsp</result>
+		</action>
+
 
 
 	</package>
