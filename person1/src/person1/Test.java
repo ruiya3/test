@@ -12,7 +12,6 @@ public class Test {
 		System.out.println(jiro.name);
 		System.out.println(jiro.age);
 		Person saburo=new Person("saburo");
-		saburo.age=0;
 		System.out.println(saburo.name);
 		System.out.println(saburo.age);
 		Person noname=new Person(25);
@@ -22,5 +21,7 @@ public class Test {
 
 		System.out.println(hanako.name);
 		System.out.println(hanako.age);
+
+		taro.talk();
 	}
 }

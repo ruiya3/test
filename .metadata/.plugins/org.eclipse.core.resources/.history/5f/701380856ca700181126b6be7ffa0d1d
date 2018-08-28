@@ -1,0 +1,47 @@
+package com.internousdev.ecsite.dao;
+
+import com.internousdev.ecsite.util.DBConnector;
+
+public class MyPageDAO {
+	private DBConnector dbConnector=new DBConnnector();
+	private Connection connection=dbConnector.getConnection();
+	public ArrayList<MyPageDTO>getMyPageUserInfo
+		(String item_transaction_id,String user_master_id)throws SQLException{
+		ArrayList<MyPageDTO>myPageDTO=new ArrayList<MyPageDTO>();
+		String sql="SELECTubit.id, iit.item_name, ubit.total_price, ubit.total_count,FROMLEFT JOINitem_info_transaction iitONubit.item_transaction_id = iit.idWHEREubit.item_transaction_id = ? AND ubit.user_master_id = ?ORDER BYinsert_date DESC";
+		try{
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, item_transaction_id);
+			preparedStatement.setString(2, user_master_id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+
+			MyPageDTO dto = new MyPageDTO();
+			dto.setId(resultSet.getString("id"));
+			dto.setItemName(resultSet.getString("item_name"));
+			dto.setTotalPrice(resultSet.getString("total_price"));
+			dto.setTotalCount(resultSet.getString("total_count"));
+			dto.setPayment(resultSet.getString("pay"));
+			dto.setInsert_date(resultSet.getString("insert_date"));
+			myPageDTO.add(dto);
+			}
+		} catch(Exception e) {
+
+			e.printStackTrace();
+			} finally {
+			connection.close();
+
+			}
+			return myPageDTO;
+
+			}
+
+			public int buyItemHistoryDelete
+
+			(String item_transaction_id, String user_master_id) throws SQLException {
+
+		}
+	}
+
+
+}

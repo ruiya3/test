@@ -2884,12 +2884,12 @@
         <mime-type>application/x-font-otf</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Drawing Template -->
+        <!-- OpenDocument Drawing template -->
         <extension>otg</extension>
         <mime-type>application/vnd.oasis.opendocument.graphics-template</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- HTML Document Template -->
+        <!-- HTML Document template -->
         <extension>oth</extension>
         <mime-type>application/vnd.oasis.opendocument.text-web</mime-type>
     </mime-mapping>
@@ -2898,17 +2898,17 @@
         <mime-type>application/vnd.oasis.opendocument.image-template</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Presentation Template -->
+        <!-- OpenDocument Presentation template -->
         <extension>otp</extension>
         <mime-type>application/vnd.oasis.opendocument.presentation-template</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Spreadsheet Template -->
+        <!-- OpenDocument Spreadsheet template -->
         <extension>ots</extension>
         <mime-type>application/vnd.oasis.opendocument.spreadsheet-template</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Text Template -->
+        <!-- OpenDocument Text template -->
         <extension>ott</extension>
         <mime-type>application/vnd.oasis.opendocument.text-template</mime-type>
     </mime-mapping>
