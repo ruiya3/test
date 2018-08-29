@@ -1,0 +1,28 @@
+package com.internousdev.ecsite.action;
+
+import java.sql.SQLException;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.internousdev.ecsite.dao.AdminItemListDAO;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class getAdminItemInfo extends ActionSupport implements SessionAware{
+	private String ItemId;
+	private String ItemName;
+	private String ItemPrice;
+	private String ItemCount;
+	public Map<String,Object> session;
+	private AdminItemListDAO adminDAO=new AdminItemListDAO();
+
+	public String execute()throws SQLException{
+		AdminItemListDAO.getAdminItemInfo(
+				session.get("ItemId").toString(),
+				session.get("ItemName").toString(),
+				session.get("ItemPrice").toString(),
+				session.get("ItemCount").toString());
+		String result=SUCCESS;
+		return result;
+	}
+}

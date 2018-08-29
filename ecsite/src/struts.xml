@@ -54,12 +54,14 @@
 		<result name="success">home.jsp</result>
 		</action>
 
-			<action name="AdminAction" class="com.internousdev.ecsite.action.AdminAction" method="execute">
-		<result name="success">AdminAction</result>
-		<result name="error">error.jsp</result>
+		<action name="AdminItemAddAction" class="com.internousdev.ecsite.action.AdminItemAddAction" method="execute">
+		<result name="success">adminItemAdd.jsp</result>
 		</action>
 
-
+		<action name="AdminItemListAction" class="com.internousdev.ecsite.action.AdminItemListAction" method="execute">
+		<result name="success">adminItemList.jsp</result>
+		<result name="error">home.jsp</result>
+		</action>
 
 	</package>
 </struts>

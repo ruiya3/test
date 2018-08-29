@@ -1,0 +1,26 @@
+package com.internousdev.ecsite.action;
+
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+public class AdminItemAddAction extends ActionSupport implements SessionAware{
+	private String ItemName;
+	private String ItemId;
+	private String ItemPrice;
+	private String ItemCount;
+	public Map<String,Object> session;
+
+	public String execute(){
+		String result=SUCCESS;
+			session.put("ItemName",ItemName);
+			session.put("ItemId", ItemId);
+			session.put("ItemPrice", ItemPrice);
+			session.put("userName", userName);
+
+		}
+		return result;
+	}
+

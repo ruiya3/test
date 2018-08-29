@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@taglib prefix="s" uri="/struts-tags"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,6 +64,14 @@ table{
 			</s:if>
 			<table>
 			<s:form action="AdminAction">
+			<tr>
+				<td>
+					<label>ID:</label>
+				</td>
+				<td>
+					<input type="text" name="ItemId" value=""/>
+				</td>
+			</tr>
 			<tr>
 				<td>
 					<label>商品名:</label>

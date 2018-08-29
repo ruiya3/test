@@ -1,0 +1,24 @@
+package com.internousdev.ecsite.action;
+
+import java.sql.SQLException;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+public class AdminItemAddComplete extends ActionSupport implements SessionAware{
+	private String ItemName;
+	private String ItemId;
+	private String ItemPrice;
+	private String ItemCount;
+	public Map<String,Object> session;
+
+	public String execute()throws SQLException{
+		userCreateCompleteDAO.createUser(session.get("loginUserId").toString(),
+				session.get("loginPassword").toString(),
+				session.get("userName").toString());
+		String result=SUCCESS;
+		return result;
+	}
+}
