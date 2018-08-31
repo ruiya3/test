@@ -10,8 +10,8 @@ public class AdminItemAddCompleteDAO {
 	private DBConnector dbConnector=new DBConnector();
 	private Connection connection=dbConnector.getConnection();
 	private DateUtil dateUtil=new DateUtil();
-	private String sql="INSERT INTO login_user_transaction(login_id,login_pass,user_name,insert_date)VALUES(?,?,?,?)";
-	public void AdminItemAdd(String ItemId,String ItemName,String ItemPrice, String ItemCount)throws
+	private String sql="INSERT INTO item_info_transaction(id,item_name,item_price,item_stock,insert_date)VALUES(?,?,?,?,?)";
+	public  void AdminItemAdd(String ItemId,String ItemName,String ItemPrice, String ItemCount)throws
 	SQLException{
 		try{
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);

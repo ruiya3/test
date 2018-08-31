@@ -21,9 +21,6 @@ public class MyPageDAO {
 
 		 try{
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//			preparedStatement.setString(1, item_transaction_id);
-//			preparedStatement.setString(2, user_master_id);
-//			上記二つの値を入れて表示するテーブルを参照する。
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
 			MyPageDTO dto = new MyPageDTO();
@@ -36,7 +33,6 @@ public class MyPageDAO {
 			myPageDTO.add(dto);
 			}
 		} catch(Exception e) {
-
 			e.printStackTrace();
 			} finally {
 			connection.close();

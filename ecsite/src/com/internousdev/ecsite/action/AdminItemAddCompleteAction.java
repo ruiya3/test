@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ecsite.dao.AdminItemAddCompleteDAO;
-import com.internousdev.ecsite.dao.AdminItemListDAO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminItemAddCompleteAction extends ActionSupport implements SessionAware{
@@ -15,10 +14,10 @@ public class AdminItemAddCompleteAction extends ActionSupport implements Session
 	private String ItemPrice;
 	private String ItemCount;
 	public Map<String,Object> session;
-	private AdminItemAddCompleteDAO adminDAO=new AdminItemListDAO();
+	private AdminItemAddCompleteDAO adminItemAddCompleteDAO=new AdminItemAddCompleteDAO();
 
 	public String execute()throws SQLException{
-		AdminItemListDAO.AdminItemAdd(
+		adminItemAddCompleteDAO.AdminItemAdd(
 				session.get("ItemId").toString(),
 				session.get("ItemName").toString(),
 				session.get("ItemPrice").toString(),
@@ -67,11 +66,13 @@ public class AdminItemAddCompleteAction extends ActionSupport implements Session
 		this.session = session;
 	}
 
-	public AdminItemListDAO getAdminDAO() {
-		return adminDAO;
+	public AdminItemAddCompleteDAO getAdminItemAddCompleteDAO() {
+		return adminItemAddCompleteDAO;
 	}
 
-	public void setAdminDAO(AdminItemListDAO adminDAO) {
-		this.adminDAO = adminDAO;
+	public void setAdminItemAddCompleteDAO(AdminItemAddCompleteDAO adminItemAddCompleteDAO) {
+		this.adminItemAddCompleteDAO = adminItemAddCompleteDAO;
 	}
+
+
 }

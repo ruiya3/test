@@ -58,8 +58,39 @@
 		<result name="success">adminItemAdd.jsp</result>
 		</action>
 
+		<action name="AdminItemAddConfirmAction" class="com.internousdev.ecsite.action.AdminItemAddConfirmAction" method="execute">
+		<result name="success">adminItemAddConfirm.jsp</result>
+		<result name="error">adminItemAdd.jsp</result>
+		</action>
+
+		<action name="AdminItemAddCompleteAction" class="com.internousdev.ecsite.action.AdminItemAddCompleteAction" method="execute">
+		<result name="success">adminItemAddComplete.jsp</result>
+		</action>
+
+		<action name="GoAdminPageAction" class="com.internousdev.ecsite.action.GoAdminPageAction" method="execute">
+			<result name="success">adminPage.jsp</result>
+		</action>
+
 		<action name="AdminItemListAction" class="com.internousdev.ecsite.action.AdminItemListAction" method="execute">
 		<result name="success">adminItemList.jsp</result>
+		<result name="error">home.jsp</result>
+		</action>
+
+		<action name="AdminUserAddAction" class="com.internousdev.ecsite.action.AdminUserAddAction" method="execute">
+		<result name="success">adminUserAdd.jsp</result>
+		</action>
+
+		<action name="AdminUserAddConfirmAction" class="com.internousdev.ecsite.action.AdminUserAddConfirmAction" method="execute">
+		<result name="success">adminUserAddConfirm.jsp</result>
+		<result name="error">adminUserAdd.jsp</result>
+		</action>
+
+		<action name="AdminUserAddCompleteAction" class="com.internousdev.ecsite.action.AdminUserAddCompleteAction" method="execute">
+		<result name="success">adminUserAddComplete.jsp</result>
+		</action>
+
+		<action name="AdminUserListAction" class="com.internousdev.ecsite.action.AdminUserListAction" method="execute">
+		<result name="success">adminUserList.jsp</result>
 		<result name="error">home.jsp</result>
 		</action>
 

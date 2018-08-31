@@ -11,7 +11,7 @@
 <meta http-equiv="imagetoolbar" content="no" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<title>Admin画面</title>
+<title>商品一覧画面</title>
 <style type="text/css">
 body {
 	margin: 0;
@@ -27,21 +27,16 @@ body {
 table {
 	text-align: center;
 	margin: 0 auto;
-	clear:both;
 }
 
-
+submit{
+	text-align:center;
+	}
 #top {
 	width: 780px;
 	margin: 30px auto;
 	border: 1px solid #333;
 }
-#left{
-	width:50%;
-	margin-top: 30px ;
-	border:1px solid black;
-}
-
 
 #header {
 	width: 100%;
@@ -53,7 +48,6 @@ table {
 	width: 100%;
 	height: 500px;
 	text-align: center;
-
 }
 
 #footer {
@@ -79,47 +73,43 @@ table {
 	<div id="main">
 
 		<div id="top">
-			<p>管理者画面</p>
+			<p>商品一覧</p>
+
 		</div>
+		<div>
+			<s:if test="adminListDTO == null">
 
-<div id="addleft">
-				<h1>
-					商品の追加は<a href='<s:url action="GoHomeAction" />'>こちら</a>
-				</h1>
-
-			</div>
-
-		<div id="left">
-
-			<s:if test="adminList == null">
-
-				<h3>商品情報はありません</h3>
+				<h3>商品情報はありません。</h3>
 
 			</s:if>
 			<s:elseif test="message == null">
 
-				<h3>ご購入情報は以下になります。</h3>
+				<h3>商品リストは以下になります。</h3>
 				<table border="1">
 					<tr>
-						<th>id</th>
+						<th>ID</th>
 						<th>商品名</th>
 						<th>値段</th>
-						<th>在庫</th>
-						<th>作成日</th>
-						<th>更新日</th>
+						<th>購入個数</th>
+						<th>追加日時</th>
+						<th>更新日時</th>
+						<th>詳細</th>
 					</tr>
-					<s:iterator value="adminList">
+					<s:iterator value="adminListDTO">
 						<tr>
-						    <td><s:property value="id" /></td>
+							<td><s:property value="id" /></td>
 							<td><s:property value="itemName" /></td>
 							<td><s:property value="itemPrice" /><span>円</span></td>
 							<td><s:property value="itemStock" /><span>個</span></td>
 							<td><s:property value="insert_date" /></td>
 							<td><s:property value="update_date" /></td>
+						<td><s:form>
+						<input type="button" value="詳細"  onclick="submitAction('HomeAction')"/>
+						</s:form></td>
 						</tr>
 					</s:iterator>
 				</table>
-				<s:form action="AdminAction">
+				<s:form action="AdminItemListAction">
 					<input type="hidden" name="deleteFlg" value="1">
 					<s:submit value="削除" method="delete" />
 				</s:form>
@@ -130,16 +120,11 @@ table {
 					<s:property value="message" />
 				</h3>
 			</s:if>
-
-		</div>
-			<div id="text-right">
-				<p>
-					Homeへ戻る場合は<a href='<s:url action="GoHomeAction" />'>こちら</a>
-				</p>
-				<p>
-					ログアウトする場合は<a href='<s:url action="LogoutAction" />'>こちら</a>
-				</p>
+			<div>
+				<span>前画面に戻る場合は</span>
+				<a href='<s:url action="GoAdminPageAction"/>'>こちら</a>
 			</div>
+		</div>
 	</div>
 	<div id="footer">
 		<div id="pr"></div>

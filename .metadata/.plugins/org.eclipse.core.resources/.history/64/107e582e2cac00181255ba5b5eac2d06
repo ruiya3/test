@@ -1,0 +1,9 @@
+package com.internousdev.ecsite.dto;
+
+public class AdminUserListDTO {
+	private String itemName;
+	private String loginId;
+	private String loginPassword;
+	private String userName;
+
+}

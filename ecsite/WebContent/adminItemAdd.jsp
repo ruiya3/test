@@ -63,7 +63,7 @@ table{
 				<s:property value="errorMassage" escape="false"/>
 			</s:if>
 			<table>
-			<s:form action="AdminAction">
+			<s:form action="AdminItemAddConfirmAction">
 			<tr>
 				<td>
 					<label>ID:</label>
@@ -101,7 +101,7 @@ table{
 			</table>
 			<div>
 				<span>前画面に戻る場合は</span>
-				<a href='<s:url action="HomeAction"/>'>こちら</a>
+				<a href='<s:url action="GoAdminPageAction"/>'>こちら</a>
 			</div>
 		</div>
 	</div>

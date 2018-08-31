@@ -100,7 +100,7 @@ table {
 						</tr>
 					</s:iterator>
 				</table>
-				<s:form action="MyPageAction">
+				<s:form action="AdminItemListAction">
 					<input type="hidden" name="deleteFlg" value="1">
 					<s:submit value="削除" method="delete" />
 				</s:form>

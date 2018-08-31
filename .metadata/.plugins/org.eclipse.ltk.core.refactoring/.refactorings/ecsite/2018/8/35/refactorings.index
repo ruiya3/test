@@ -18,3 +18,7 @@
 1535527642729	型名 'AdminDTO' を変更します
 1535528168946	型名 'AdminItemAddCompleteDAO' を変更します
 1535528193830	型名 'AdminItemAddCompleteDTO' を変更します
+1535592353367	リソース 'adminItemList.jsp' の名前変更
+1535592469913	リソース 'adminItemAddConfirm.jsp' の名前変更
+1535607793599	フォルダーを移動
+1535618853818	フィールド 'adminUserListDTO' をカプセル化します

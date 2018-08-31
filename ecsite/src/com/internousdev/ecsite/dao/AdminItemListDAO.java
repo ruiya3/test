@@ -14,29 +14,27 @@ public class AdminItemListDAO {
 	private Connection connection=dbConnector.getConnection();
 
 	public ArrayList<AdminItemListDTO>getAdminItemInfo()throws SQLException{
-		 ArrayList<AdminItemListDTO>adminDTO=new ArrayList<AdminItemListDTO>();
-		 String sql="SELECT * from `item_info_transaction` ";
+		 ArrayList<AdminItemListDTO>adminListDTO=new ArrayList<AdminItemListDTO>();
+		 String sql="SELECT * FROM `item_info_transaction` ORDER BY id DESC";
 		try{
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
 			AdminItemListDTO dto = new AdminItemListDTO();
 			dto.setId(resultSet.getString("id"));
-			dto.setItemName(resultSet.getString("item_name"));
-			dto.setItemPrice(resultSet.getString("item_price"));
-			dto.setItemStock(resultSet.getString("item_stock"));
+			dto.setItemName(resultSet.getString("item_Name"));
+			dto.setItemPrice(resultSet.getString("item_Price"));
+			dto.setItemStock(resultSet.getString("item_Stock"));
 			dto.setInsert_date(resultSet.getString("insert_date"));
 			dto.setUpdate_date(resultSet.getString("update_date"));
-			adminDTO.add(dto);
+			adminListDTO.add(dto);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 			} finally {
 			connection.close();
-
 			}
-			return adminDTO;
+			return adminListDTO;
 
 			}
 
