@@ -3,6 +3,7 @@ package com.internousdev.ecsite.action;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -23,8 +24,10 @@ public class AdminItemListAction extends ActionSupport implements SessionAware{
 		}
 		if(deleteFlg==null){
 			adminListDTO=AdminDAO.getAdminItemInfo();
+			for(Entry<String, Object> entry : session.entrySet()){
+			    System.out.println(entry.getKey() + ":" + entry.getValue());
 
-
+			}
 		}
 		else if(deleteFlg.equals("1")){
 			delete();
